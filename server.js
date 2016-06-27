@@ -4,9 +4,14 @@ const app = express()
 
 // importing our needed modules
 import morgan from 'morgan'
+import mongoose from 'mongoose'
 
-// setting our Port
-const PORT = 1600
+// setting our configs
+import {appConfig, dbConfig} from './server.config'
+const PORT = appConfig.port
+
+// connecting to new db
+mongoose.connect(dbConfig.db)
 
 // setting our logger to dev mode
 app.use(morgan('dev'))
