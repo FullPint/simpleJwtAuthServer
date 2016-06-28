@@ -6,6 +6,7 @@ const app = express()
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import boodyParser from 'body-parser'
+import cors from 'cors'
 
 // setting our configs
 import {appConfig, dbConfig} from './server.config'
@@ -22,6 +23,9 @@ app.use(boodyParser.json())
 
 // setting our logger to dev mode
 app.use(morgan('dev'))
+
+// setting up cors
+app.use(cors())
 
 // initializing our main router entry point
 import mainRouter from './app/routes/main.router'
