@@ -2,7 +2,7 @@ import jwt from 'jwt-simple'
 import User from '~/app/models/users/user.model'
 import {jwtConfig} from '~./server.config'
 
-const userAuth = (req, res) => {
+const UserLogin = (req, res) => {
   User.findOne({
     userName: req.body.userName
   }, (err, user) => {
@@ -33,4 +33,4 @@ const userAuth = (req, res) => {
   })
 }
 
-export default userAuth
+export default UserLogin
