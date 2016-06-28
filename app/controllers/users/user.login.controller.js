@@ -1,4 +1,4 @@
-import jwt from 'jwt-simple'
+import jwt from 'jsonwebtoken'
 import User from '~/app/models/users/user.model'
 import {jwtConfig} from '~./server.config'
 
@@ -15,9 +15,10 @@ const UserLogin = (req, res) => {
       })
     } else {
       user.comparePassword(req.body.password, (err, isMatch) => {
-        const expires = 1372674336
         if (isMatch && !err) {
-          const token = jwt.encode({iss: user, exp: expires}, jwtConfig.secret)
+          const token = jwt.sign(user, jwtConfig.secret, {
+            expiresIn : 60*60*24
+          })
           res.json({
             success: true,
             token: token
