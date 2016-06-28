@@ -1,10 +1,10 @@
 import jwt from 'jwt-simple'
 import User from '~/app/models/users/user.model'
-import jwtConfig from '~./server.config.'
+import {jwtConfig} from '~./server.config'
 
 const userAuth = (req, res) => {
   User.findOne({
-    name: req.body.name
+    userName: req.body.userName
   }, (err, user) => {
     if (err) {
       throw err
@@ -16,11 +16,11 @@ const userAuth = (req, res) => {
     } else {
       user.comparePassword(req.body.password, (err, isMatch) => {
         const expires = 1372674336
-        if (isMatch && err) {
+        if (isMatch && !err) {
           const token = jwt.encode({iss: user, exp: expires}, jwtConfig.secret)
           res.json({
             success: true,
-            token: 'JWT' + token
+            token: token
           })
         } else {
           res.send({

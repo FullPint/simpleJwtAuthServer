@@ -1,14 +1,14 @@
 import User from '~/app/models/users/user.model'
 
 const UserCreate = (req, res) => {
-  if (!req.body.name || !req.body.password) {
+  if (!req.body.userName || !req.body.password) {
     res.json({
       success: false,
       message: 'Please enter a valid Username and Password'
     })
   } else {
     const newUser = new User({
-      name: req.body.name,
+      userName: req.body.userName,
       password: req.body.password
     })
     newUser.save((err) => {

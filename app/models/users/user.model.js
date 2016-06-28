@@ -19,14 +19,14 @@ const UserSchema = new Schema({
   }
 })
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
   const user = this
   if (this.isModified('password') || this.isNew) {
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, function (err, salt) {
       if (err) {
         return next(err)
       }
-      bcrypt.has(user.password, salt, (err, hash) => {
+      bcrypt.hash(user.password, salt, function (err, hash) {
         if (err) {
           return next(err)
         }
@@ -39,8 +39,8 @@ UserSchema.pre('save', (next) => {
   }
 })
 
-UserSchema.methods.comparePassword = (password, callback) => {
-  bcrypt.compare(password, this.password, (err, isMatch) => {
+UserSchema.methods.comparePassword = function (password, callback) {
+  bcrypt.compare(password, this.password, function (err, isMatch) {
     if (err) {
       return callback(err)
     }
