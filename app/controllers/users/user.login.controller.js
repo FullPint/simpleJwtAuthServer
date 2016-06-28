@@ -17,7 +17,7 @@ const UserLogin = (req, res) => {
       user.comparePassword(req.body.password, (err, isMatch) => {
         if (isMatch && !err) {
           const token = jwt.sign(user, jwtConfig.secret, {
-            expiresIn : 60*60*24
+            expiresIn: 60 * 60 * 24
           })
           res.json({
             success: true,

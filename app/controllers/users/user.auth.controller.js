@@ -4,9 +4,7 @@ import {jwtConfig} from '~./server.config'
 const UserAuth = function (req, res, next) {
   const token = req.body.token || req.query.token || req.headers['x-access-token']
   if (token) {
-    console.log('it comes here')
-    jwt.verify(token, jwtConfig.secret, function (err, decoded) {
-      console.log('but never here')
+    jwt.verify(token, jwtConfig.secret, (err, decoded) => {
       if (err) {
         return res.json({
           success: false,
