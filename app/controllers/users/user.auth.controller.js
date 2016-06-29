@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import {jwtConfig} from '~./server.config'
 
-const UserAuth = function (req, res, next) {
+const UserAuth = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token']
   if (token) {
     jwt.verify(token, jwtConfig.secret, (err, decoded) => {
